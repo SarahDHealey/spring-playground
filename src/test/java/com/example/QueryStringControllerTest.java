@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,7 +23,7 @@ public class QueryStringControllerTest {
 
     @Test
     public void testIndividualQueryEndpoint() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.get("/careBears/individual?name=sleepyBear&power=sleep");
+        RequestBuilder request = get("/careBears/individual?name=sleepyBear&power=sleep");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -31,11 +32,20 @@ public class QueryStringControllerTest {
 
     @Test
     public void testQueryBearMap() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.get("/careBears/hashMap?name=sleepyBear&power=sleep");
+        RequestBuilder request = get("/careBears/hashMap?name=sleepyBear&power=sleep");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("{name=sleepyBear, power=sleep}"));
+    }
+
+    @Test
+    public void testQueryObjects() throws Exception {
+        RequestBuilder request = get("/careBears/photos?sortBy=date&owner=Chloe");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("sortBy is date; owner is Chloe"));
     }
 
 }

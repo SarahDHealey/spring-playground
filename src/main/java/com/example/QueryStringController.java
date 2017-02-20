@@ -22,4 +22,32 @@ public class QueryStringController {
         return querystring.toString();
     }
 
+    public static class PhotoInfo {
+        private String sortBy;
+        private String owner;
+
+        public String getSortBy() {
+            return sortBy;
+        }
+
+        public void setSortBy(String sortBy) {
+            this.sortBy = sortBy;
+        }
+
+        public String getOwner() {
+            return owner;
+        }
+
+        public void setOwner(String owner) {
+            this.owner = owner;
+        }
+    }
+
+    @GetMapping("/photos")
+    public String careBearPhotos(PhotoInfo photoInfo) {
+        return String.format("sortBy is %s; owner is %s", photoInfo.getSortBy(), photoInfo.getOwner());
+    }
+
 }
+
+
