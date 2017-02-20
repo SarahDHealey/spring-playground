@@ -18,4 +18,6 @@ public class PagesController {
     @DeleteMapping("/goodbye")
     public void goodbye() {
     }
+
+
 }
