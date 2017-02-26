@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PathVariableController {
 
-    @GetMapping("/carparts/{carpartId}")
-    public String getCarpartId(@PathVariable String carpartId) {
-        return String.format("carpartId:%d", 9);
+    @GetMapping("/carparts/{carpartId}/{sectionId}")
+    public String getIndividualParams(@PathVariable int carpartId, @PathVariable("sectionId") int sId) {
+        return String.format("carpartId:%d; sectionId:%d", carpartId, sId);
     }
 }

@@ -22,11 +22,12 @@ public class PathVariableControllerTest {
     @Test
     public void carPartFinder() throws Exception {
         int carpartId = 9;
-        RequestBuilder request = MockMvcRequestBuilders.get("/carparts/%d", carpartId);
+        int sectionId = 4;
+        RequestBuilder request = MockMvcRequestBuilders.get(String.format("/carparts/%d/%d", carpartId, sectionId));
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("carpartId:9"));
+                .andExpect(content().string("carpartId:9; sectionId:4"));
     }
 
 }
