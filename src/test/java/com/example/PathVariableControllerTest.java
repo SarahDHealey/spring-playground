@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.controller.PathVariableController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,24 @@ public class PathVariableControllerTest {
     }
     @Test
     public void getParamsAsMap() throws Exception {
-        int taskId = 9;
-        int commentId = 4;
-        RequestBuilder request = MockMvcRequestBuilders.get(String.format("/tasks/%d/comments/%d", taskId, commentId));
+        int taskId = 34;
+        int commentId = 6;
+        RequestBuilder request = MockMvcRequestBuilders.get(String.format("/tasks/%d/commentsAsMap/%d", taskId, commentId));
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("{taskId=9, commentId=4}"));
+                .andExpect(content().string("{taskId=34, commentId=6}"));
+    }
+    @Test
+    public void getParamsAsCustomObject() throws Exception {
+        int taskId = 34;
+        int commentId = 6;
+        RequestBuilder request = MockMvcRequestBuilders.get(String.format("/tasks/%d/commentsAsObject/%d", taskId, commentId));
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("taskId is 34; commentId is 6"));
+
     }
 
 }

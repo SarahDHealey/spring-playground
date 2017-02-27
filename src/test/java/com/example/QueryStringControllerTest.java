@@ -1,6 +1,7 @@
 package com.example;
 
 
+import com.example.controller.QueryStringController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
