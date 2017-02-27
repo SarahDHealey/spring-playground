@@ -20,7 +20,7 @@ public class PathVariableControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void carPartFinder() throws Exception {
+    public void getIndividualParams() throws Exception {
         int carpartId = 9;
         int sectionId = 4;
         RequestBuilder request = MockMvcRequestBuilders.get(String.format("/carparts/%d/%d", carpartId, sectionId));
@@ -28,6 +28,16 @@ public class PathVariableControllerTest {
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("carpartId:9; sectionId:4"));
+    }
+    @Test
+    public void getParamsAsMap() throws Exception {
+        int taskId = 9;
+        int commentId = 4;
+        RequestBuilder request = MockMvcRequestBuilders.get(String.format("/tasks/%d/comments/%d", taskId, commentId));
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("{taskId=9, commentId=4}"));
     }
 
 }
